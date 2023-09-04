@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basics/answer.dart';
+
 import 'package:flutter_basics/question.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -36,19 +40,10 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Question(question: questions[_questionIndex]),
-            ElevatedButton(
-              onPressed: _answerQuestion,
-              child: const Text('Answer 1'),
-            ),
-            ElevatedButton(
-              onPressed: _answerQuestion,
-              child: const Text('Answer 2'),
-            ),
-            ElevatedButton(
-              onPressed: _answerQuestion,
-              child: const Text('Answer 3'),
-            ),
+            Question(questions[_questionIndex]),
+            Answer(_answerQuestion),
+            Answer(_answerQuestion),
+            Answer(_answerQuestion),
           ],
         ),
       ),
