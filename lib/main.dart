@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_basics/answer.dart';
 
-import 'package:flutter_basics/question.dart';
+import 'package:flutter_basics/quiz.dart';
+import 'package:flutter_basics/result.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final questions = const [
+  final _questions = const [
     {
       'questionText': 'What\'s your favourite color?',
       'answers': ['Red', 'Purple', 'Blue', 'Black'],
@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _questionIndex += 1;
     });
-    if (_questionIndex < questions.length) {
+    if (_questionIndex < _questions.length) {
       print('We have more questions');
     }
     print(_questionIndex);
@@ -47,28 +47,18 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('My App'),
-        ),
-        body: _questionIndex < questions.length
-            ? Column(
-                children: [
-                  Question(
-                    questions[_questionIndex]['questionText'].toString(),
-                  ),
-                  ...(questions[_questionIndex]['answers'] as List<String>)
-                      .map((answer) {
-                    return Answer(_answerQuestion, answer);
-                  }).toList(),
-                ],
-              )
-            : const Center(
-                child: Text('You\'ve successfully answered all questions'),
-              ),
-      ),
+          appBar: AppBar(
+            title: const Text('My App'),
+          ),
+          body: _questionIndex < _questions.length
+              ? Quiz(
+                  answerQuestion: _answerQuestion,
+                  questionIndex: _questionIndex,
+                  questions: _questions,
+                )
+              : const Result()),
     );
   }
 }
