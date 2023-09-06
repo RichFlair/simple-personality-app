@@ -12,7 +12,6 @@ class MyApp extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _MyAppState();
   }
 }
@@ -21,28 +20,41 @@ class _MyAppState extends State<MyApp> {
   final _questions = const [
     {
       'questionText': 'What\'s your favourite color?',
-      'answers': ['Red', 'Purple', 'Blue', 'Black'],
+      'answers': [
+        {'text': 'Red', 'score': 3},
+        {'text': 'Green', 'score': 2},
+        {'text': 'Blue', 'score': 4},
+        {'text': 'Black', 'score': 10}
+      ],
     },
     {
       'questionText': 'What\'s your favourite animal?',
-      'answers': ['Cat', 'Dog', 'Snake', 'Bird'],
+      'answers': [
+        {'text': 'Cat', 'score': 3},
+        {'text': 'Dog', 'score': 1},
+        {'text': 'Snake', 'score': 4},
+        {'text': 'Bird', 'score': 10}
+      ],
     },
     {
       'questionText': 'What\'s your favourite food?',
-      'answers': ['Jollof', 'Fufu', 'Ampesie', 'Banku'],
+      'answers': [
+        {'text': 'Ampesie', 'score': 3},
+        {'text': 'Jollof', 'score': 1},
+        {'text': 'Banku', 'score': 4},
+        {'text': 'Fufu', 'score': 10}
+      ],
     },
   ];
 
   var _questionIndex = 0;
+  int _score = 0;
 
-  void _answerQuestion() {
+  void _answerQuestion(int score) {
     setState(() {
       _questionIndex += 1;
+      _score += _score;
     });
-    if (_questionIndex < _questions.length) {
-      print('We have more questions');
-    }
-    print(_questionIndex);
   }
 
   @override
@@ -54,7 +66,7 @@ class _MyAppState extends State<MyApp> {
           ),
           body: _questionIndex < _questions.length
               ? Quiz(
-                  answerQuestion: _answerQuestion,
+                  answerQuestion: () => _answerQuestion(_score),
                   questionIndex: _questionIndex,
                   questions: _questions,
                 )

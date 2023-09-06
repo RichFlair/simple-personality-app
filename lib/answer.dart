@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Answer extends StatelessWidget {
-  // ignore: prefer_typing_uninitialized_variables
-  final selectHandler;
+  final Function selectHandler;
   final String answerText;
 
   const Answer(this.selectHandler, this.answerText, {super.key});
@@ -13,7 +12,7 @@ class Answer extends StatelessWidget {
       width: double.infinity,
       margin: const EdgeInsets.all(10),
       child: ElevatedButton(
-        onPressed: selectHandler,
+        onPressed: () => selectHandler(),
         child: Text(answerText),
       ),
     );
